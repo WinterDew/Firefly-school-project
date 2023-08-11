@@ -22,6 +22,7 @@
 
 - Family: [Roboto](https://fonts.google.com/specimen/Roboto)
 - Weights: 400, 700
+- Sizes : 18, 24, 48
 ```css
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
