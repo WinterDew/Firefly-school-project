@@ -6,11 +6,10 @@
     <title>FireFly | Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-
 </head>
 <body>
     <div id="bg-img" style="--img-src:url({{url_for('static',filename='images/low_poly_grid.svg')}})"></div>
-    <div class="main">
+    <main>
         <div class="tagline">FireFly</div>
         <div class="quote">Connect. Chat. <br> Discover.</div>
         <div class="form">
@@ -18,10 +17,13 @@
             <div>Username</div>
             <input type="text" name="username" id="uid">
             <div>Password</div>
-            <input type="text" name="password" id="pwd">
-            <input type="button" value="Sign Up">
-            <input type="button" value="Log In">
+            <input type="password" name="password" id="pwd">
+            <div class="buttons">
+                <input type="button" value="Sign Up" id="signup">
+                <input type="button" value="Log In" id="login">
+            </div>
         </div>
-    </div>
+    </main>
 </body>
+<script src="{{ url_for('static', filename='login.js') }}"></script>
 </html>
