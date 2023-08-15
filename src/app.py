@@ -1,12 +1,8 @@
 from flask import Flask, render_template, url_for, request
 from flask import redirect
-from flask_sqlalchemy import SQLAlchemy
 from bcrypt import hashpw,checkpw,gensalt
-from flask_migrate import Migrate
-
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def index():
