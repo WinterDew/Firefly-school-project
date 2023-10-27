@@ -110,10 +110,10 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-    outline-color: var(--ac-color);
+    outline-color: var(--bg-color);
     outline: 1em;
     font-size: 2vb;
-    background-color: none;
+    background-color: var(--n1-color);
     text-decoration: none;
     text-align: center;
 

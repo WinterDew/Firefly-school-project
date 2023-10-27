@@ -1,7 +1,8 @@
 what works?:
 Login, Signup and database hashing and pragma setup
-
+Home page (posts and also allow to post a new message)
 
 
 TODO:
-Home page (posts and also allow to post a new message)
+Complete css for home page and fix up some styling.
+Add logout logic

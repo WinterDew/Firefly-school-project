@@ -1,0 +1,110 @@
+body{
+    height:auto;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-color);
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 8vh;
+    background-color: var(--n1-color);
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+.navbar>div{
+    font-size: 5vh;
+    font-family: var(--ft-fml);
+    font-weight: bolder;
+    color: var(--pr-color);
+
+}
+
+.navbar>a{
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    font-size: 3vb;
+    font-family: var(--ft-fml);
+    color: var(--pr-color);
+    text-decoration: none;
+    
+}
+
+form{
+    display: flex;
+    width: 100vw;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    bottom: 0;
+    min-height: 5vh;
+    background-color: var(--n1-color);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    justify-content: space-between;
+
+}
+form>#new_post{
+    flex-basis: 90%;
+    outline:none;
+    border:none;
+    font-family: var(--ft-fml);
+    background-color: #d3d3d3;
+    font-size: 3vb;
+    color: var(--bg-color);
+    margin-bottom: 1vh;
+    margin-top: 0.5vh;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    border-radius: 5pt;
+    box-shadow: inset 0px 2px 4px rgba(100,100,100,0.5);
+    padding-left: 0.5ch;
+}
+form>#post{
+    font-size: 3vb;
+    outline: none;
+    padding-left: 1vb;
+    padding-right: 1vb;
+    background: none !important;
+    background-color: transparent;
+    height: 4vb;
+    text-align: center;
+    color: var(--ac-color);
+    font-weight: bolder;
+    inset: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 1vb;
+    transition: box-shadow ease-in-out 500ms;
+}
+
+#post:hover{
+    box-shadow: 0px 0px 10px var(--ac-color);
+}
+
+.posts{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.post{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-around;
+    width: 80%;
+    min-height: 10vh;
+}

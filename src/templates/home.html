@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='toast.css') }}">
+    
+    <title>FireFly | Home</title>
+</head>
+<body>
+    <div class="navbar">
+        <div>FireFly</div>
+        <a href="/logout">Logout</a>
+    </div>
+    <div id="toast">{{ toast }}</div>
+    <div class="posts">
+        {% for post in posts %}
+        <div class="post">
+            <div class="author">{{ post[0] }}</div>
+            <div class="date">{{ post[2] }}</div>
+            <div class="content">{{ post[1] }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="/home" method="post">
+        <div></div>
+        <input required type="text" name="content" id="new_post">
+        <input type="submit" value="Post" id="post">
+    </form>
+
+</body>
+<script onload="showtoast()" src="{{ url_for('static', filename='toast.js') }}"></script>
+
+</html>

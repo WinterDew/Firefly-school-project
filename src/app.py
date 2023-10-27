@@ -9,7 +9,6 @@ import time
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '#tr5988fhdskghlkoifayfgghakf'
 
-toast = ""
 
 def setup_db():
     conn = sql.connect("firefly.db")
@@ -17,7 +16,7 @@ def setup_db():
     cur.execute("PRAGMA foreign_keys = ON;")
     cur.execute("PRAGMA auto_vacuum = 1;")
     cur.execute("CREATE TABLE IF NOT EXISTS users(username TEXT PRIMARY KEY, password TEXT NOT NULL, date_joined DATETIME NOT NULL);")
-    cur.execute("CREATE TABLE IF NOT EXISTS posts(author TEXT NOT NULL, post TEXT NOT NULL, date_created DATETIME NOT NULL, FOREIGN KEY(author) REFERENCES users(username));")
+    cur.execute("CREATE TABLE IF NOT EXISTS posts(author TEXT NOT NULL, content TEXT NOT NULL, date_created DATETIME NOT NULL, FOREIGN KEY(author) REFERENCES users(username));")
     conn.commit()
     cur.close()
     conn.close()
@@ -26,6 +25,7 @@ setup_db()
 
 @app.route("/")
 def index():
+    session['toast'] = ""
     if "username" in session:
         return redirect(url_for("home"))
     else:
@@ -34,7 +34,7 @@ def index():
 
 @app.route("/login", methods = ["GET","POST"])
 def login():
-    global toast
+    
     if request.method == "POST":
         print("login request recieved")
         username = request.form["username"]
@@ -42,8 +42,8 @@ def login():
         conn = sql.connect("firefly.db")
         cur = conn.cursor()
         if cur.execute("SELECT username FROM users WHERE username = ?",(username,)).fetchone() == None:
-            toast = "The user does not exist, Please signup."
-            print(toast)
+            session["toast"] = "The user does not exist, Please signup."
+            print(session["toast"])
             conn.commit()
             cur.close()
             conn.close()
@@ -56,19 +56,19 @@ def login():
             conn.close()
             return redirect(url_for('index'))
         else:
-            toast = "Incorrect password, Please try again"
+            session["toast"] = "Incorrect password, Please try again"
             conn.commit()
             cur.close()
             conn.close()
             return redirect(url_for(login))
 
     else:
-        return render_template("login.html", toast = toast)
+        return render_template("login.html", toast = session["toast"])
 
 
 @app.route("/signup", methods = ["GET","POST"])
 def signup():
-    global toast
+    
     if request.method == "POST":
         print("signup request recieved")
         username = request.form["username"]
@@ -78,8 +78,8 @@ def signup():
             conn = sql.connect("firefly.db")
             cur = conn.cursor()
             if cur.execute("SELECT username FROM users WHERE username = ?",(username,)).fetchone() != None:
-                toast = "User already exists, Please login."
-                print(toast)
+                session["toast"] = "User already exists, Please login."
+                print(session["toast"])
                 conn.commit()
                 cur.close()
                 conn.close()
@@ -90,18 +90,40 @@ def signup():
                 cur.close()
                 conn.close()
         except Exception as e:
-            print(toast, e)
-            toast = "An error occurred, Please try again."
+            print(session["toast"], e)
+            session["toast"] = "An error occurred, Please try again."
         
-        toast = "Signup successful, Please login."
-        print(toast)
+        session["toast"] = "Signup successful, Please login."
+        print(session["toast"])
         return redirect(url_for('login'))
     else:
-        return render_template("signup.html", toast = toast)
+        return render_template("signup.html", toast = session["toast"])
 
-@app.route("/home")
+@app.route("/home", methods=["GET","POST"])
 def home():
-    return f"Welcome to your home page {session['username']}"
+    
+    conn = sql.connect("firefly.db")
+    cur = conn.cursor()
+    if request.method == "POST":
+        username = session["username"]
+        content = request.form['content']
+        cur.execute("INSERT INTO posts VALUES (?,?,?)",(username,content,datetime.timestamp(datetime.now())))
+        conn.commit()
+        cur.close()
+        conn.close()
+        session["toast"] = "Posted successfully!"
+        return redirect(url_for('home'))
+    else:
+        dataset = cur.execute("SELECT * FROM posts ORDER BY date_created DESC").fetchall()
+        conn.commit()
+        cur.close()
+        conn.close()
+        posts = []
+        for data in dataset:
+            posts.append([data[0],data[1],datetime.fromtimestamp(data[2]).ctime()])
+
+        return render_template("home.html",posts = posts,toast = session["toast"])
+    
 
 if __name__ == "__main__":
     app.run("127.0.0.1",9800,True)
