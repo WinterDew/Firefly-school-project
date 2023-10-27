@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='toast.css') }}">
-
 </head>
 <body>
     
@@ -15,16 +14,18 @@
     <main>
         <div class="tagline">FireFly</div>
         <div class="quote">Connect. Chat. <br> Discover.</div>
-        <div id="toast">{{ toast }}</div>
-        <form class="form" action="/login" method="post">
-            <div>Log In.</div>
+        <div id="toast">{{toast}}</div>
+
+
+        <form class="form" action="/signup" method="post">
+            <div>Sign Up.</div>
             <div>Username</div>
             <input required type="text" name="username" id="uid">
             <div>Password</div>
             <input required type="password" name="password" id="pwd">
             <div class="buttons">
-                <input type="submit" value="Log In" id="login">
-                <a href="/signup" id="signup">Sign Up <br>Instead!</a>
+                <input type="submit" value="Sign Up" id="signup">
+                <a href="/login" id="login">Log In <br>Instead!</a>
             </div>
         </form>
     </main>
