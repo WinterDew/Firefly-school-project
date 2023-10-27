@@ -14,13 +14,14 @@ toast = ""
 def setup_db():
     conn = sql.connect("firefly.db")
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS users(username TEXT PRIMARY KEY, password TEXT, date_joined DATETIME);")
+    cur.execute("PRAGMA foreign_keys = ON;")
+    cur.execute("PRAGMA auto_vacuum = 1;")
+    cur.execute("CREATE TABLE IF NOT EXISTS users(username TEXT PRIMARY KEY, password TEXT NOT NULL, date_joined DATETIME NOT NULL);")
+    cur.execute("CREATE TABLE IF NOT EXISTS posts(author TEXT NOT NULL, post TEXT NOT NULL, date_created DATETIME NOT NULL, FOREIGN KEY(author) REFERENCES users(username));")
     conn.commit()
     cur.close()
     conn.close()
 setup_db()
-
-
 
 
 @app.route("/")
@@ -36,10 +37,33 @@ def login():
     global toast
     if request.method == "POST":
         print("login request recieved")
-        return ""
+        username = request.form["username"]
+        password = request.form["password"]
+        conn = sql.connect("firefly.db")
+        cur = conn.cursor()
+        if cur.execute("SELECT username FROM users WHERE username = ?",(username,)).fetchone() == None:
+            toast = "The user does not exist, Please signup."
+            print(toast)
+            conn.commit()
+            cur.close()
+            conn.close()
+            return redirect(url_for("signup"))
+        password_db = cur.execute("SELECT password FROM users WHERE username = ?",(username,)).fetchone()
+        if checkpw(password.encode(),password_db[0].encode()):
+            session['username'] = username
+            conn.commit()
+            cur.close()
+            conn.close()
+            return redirect(url_for('index'))
+        else:
+            toast = "Incorrect password, Please try again"
+            conn.commit()
+            cur.close()
+            conn.close()
+            return redirect(url_for(login))
+
     else:
         return render_template("login.html", toast = toast)
-
 
 
 @app.route("/signup", methods = ["GET","POST"])
@@ -73,7 +97,7 @@ def signup():
         print(toast)
         return redirect(url_for('login'))
     else:
-        return render_template("signup.html")
+        return render_template("signup.html", toast = toast)
 
 @app.route("/home")
 def home():

@@ -1,2 +1,7 @@
-Redirect not working
-session
+what works?:
+Login, Signup and database hashing and pragma setup
+
+
+
+TODO:
+Home page (posts and also allow to post a new message)
