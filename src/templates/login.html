@@ -8,7 +8,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 <body>
-    <div id="bg-img" style="--img-src:url({{url_for('static',filename='images/low_poly_grid.svg')}})"></div>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="toast">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <div id="bg-img" style="--img-src:url('{{url_for('static',filename='images/low_poly_grid.svg')}}')"></div>
     <main>
         <div class="tagline">FireFly</div>
         <div class="quote">Connect. Chat. <br> Discover.</div>
