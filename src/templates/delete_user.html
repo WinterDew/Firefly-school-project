@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireFly | Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='toast.css') }}">
+
+</head>
+<body>
+    
+    <div id="bg-img" style="--img-src:url('{{url_for('static',filename='images/low_poly_grid.svg')}}')"></div>
+    <main>
+        <div class="tagline">FireFly</div>
+        <div class="quote">Connect. Chat. <br> Discover.</div>
+        <div id="toast">{{ toast }}</div>
+        <form class="form" action="/user/delete" method="post">
+            <div>Delete Account (Irreversible)</div>
+            <div>Username</div>
+            <input required type="text" name="username" id="uid">
+            <div>Password</div>
+            <input required type="password" name="password" id="pwd">
+            <div class="buttons">
+                <input type="submit" value="Delete" id="delete">
+                <a href="/home" id="signup">Cancel</a>
+            </div>
+        </form>
+    </main>
+</body>
+<script onload="showtoast()" src="{{ url_for('static', filename='toast.js') }}"></script>
+</html>

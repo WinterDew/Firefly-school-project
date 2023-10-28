@@ -12,26 +12,34 @@
 </head>
 <body>
     <div class="navbar">
-        <div>FireFly</div>
-        <a href="/logout">Logout</a>
+        <div class="title">FireFly</div>
+        <div class="menu">
+            <a href="/logout">Logout</a>
+            <a href="/user/delete">Delete Account</a>
+        </div>
     </div>
     <div id="toast">{{ toast }}</div>
     <div class="posts">
         {% for post in posts %}
         <div class="post">
+            
             <div class="author">{{ post[0] }}</div>
             <div class="date">{{ post[2] }}</div>
             <div class="content">{{ post[1] }}</div>
+            {% if post[0] == session['username'] %}
+            <a href="/post/delete?user={{post[0]}}&id={{post[3]}}">Delete</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
-    <form action="/home" method="post">
-        <div></div>
-        <textarea name="content" id="new_post" cols="30" rows="10"></textarea>
-        <input type="submit" value="Post" id="post">
-    </form>
+    
 
 </body>
+<form action="/home" method="post">
+    <div></div>
+    <textarea name="content" id="new_post" cols="30" rows="10"></textarea>
+    <input type="submit" value="Post" id="post">
+</form>
 <script onload="showtoast()" src="{{ url_for('static', filename='toast.js') }}"></script>
 
 </html>

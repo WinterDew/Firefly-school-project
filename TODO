@@ -1,9 +1,12 @@
 what works?:
 Login, Signup and database hashing and pragma setup
 Home page (posts and also allow to post a new message)
-Complete css for home page and fix up some styling.
-Add logout logic
+Complete css for home page.
+Way to delete posts, and users.
+Secure secret key generation
+
 
 TODO:
-Way to delete posts, and users.
+Auto refresh on database update for realtime chat. (Not in scope of current project)
+
 
