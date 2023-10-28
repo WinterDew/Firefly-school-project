@@ -1,11 +1,22 @@
+html{
+    width: 100vw;
+    height: 100vh;
+    font-family: var(--ft-fml);
+}
+
 body{
     height:auto;
-    width: 100vw;
+    /* width: 100vw; */
+    max-width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--bg-color);
+    /* padding-right: 20px;
+    padding-bottom: 20px; */
+    overflow-x: hidden;
+    overflow-wrap: break-word;
 }
 
 .navbar{
@@ -40,10 +51,10 @@ body{
 
 form{
     display: flex;
-    width: 100vw;
+    width: 100%;
     flex-direction: row;
     align-items: center;
-    position: absolute;
+    position: sticky;
     padding-left: 3vw;
     padding-right: 3vw;
     bottom: 0;
@@ -58,7 +69,6 @@ form>#new_post{
     flex-basis: 90%;
     outline:none;
     border:none;
-    font-family: var(--ft-fml);
     background-color: #d3d3d3;
     font-size: 3vb;
     color: var(--bg-color);
@@ -67,8 +77,13 @@ form>#new_post{
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     border-radius: 5pt;
+    width: 100%;
+    max-height: 10vh;
+    height:10vb;
+    min-height: 3vh;
     box-shadow: inset 0px 2px 4px rgba(100,100,100,0.5);
     padding-left: 0.5ch;
+    resize: none;
 }
 form>#post{
     font-size: 3vb;
@@ -77,7 +92,7 @@ form>#post{
     padding-right: 1vb;
     background: none !important;
     background-color: transparent;
-    height: 4vb;
+    min-height: 4vb;
     text-align: center;
     color: var(--ac-color);
     font-weight: bolder;
@@ -97,14 +112,57 @@ form>#post{
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
     justify-content: space-around;
+    padding-top: 2vh;
+    gap: 2vh;
+    
 }
 .post{
     display: flex;
     flex-direction: column;
     align-items: left;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     width: 80%;
-    min-height: 10vh;
+    min-height: 15vh;
+    background-color: var(--ac-color);
+    border-radius: 1em;
+    overflow-x: auto;
+    overflow-wrap: break-word;
+    padding: 1em;
 }
+
+.author{
+    font-size: 3vb;
+    
+}
+.date{
+   font-size: 2vb;
+   color: var(--n1-color);
+    
+}
+.content{
+    padding-top: 1em;
+    font-size: 2.5vb;
+}
+
+/* Thinning up the scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.1em;
+  height:0.1em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: var(--pr-color);
+  border-radius: 1em;
+}
+  

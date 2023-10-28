@@ -1,8 +1,9 @@
 what works?:
 Login, Signup and database hashing and pragma setup
 Home page (posts and also allow to post a new message)
-
-
-TODO:
 Complete css for home page and fix up some styling.
 Add logout logic
+
+TODO:
+Way to delete posts, and users.
+

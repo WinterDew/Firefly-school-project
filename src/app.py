@@ -60,7 +60,7 @@ def login():
             conn.commit()
             cur.close()
             conn.close()
-            return redirect(url_for(login))
+            return redirect(url_for("login"))
 
     else:
         return render_template("login.html", toast = session["toast"])
@@ -121,9 +121,15 @@ def home():
         posts = []
         for data in dataset:
             posts.append([data[0],data[1],datetime.fromtimestamp(data[2]).ctime()])
+        toast = session["toast"]
+        session["toast"] = ""
+        return render_template("home.html",posts = posts,toast = toast)
 
-        return render_template("home.html",posts = posts,toast = session["toast"])
-    
+@app.route("/logout")
+def logout():
+    session.pop("username")
+    session["toast"] = "Logout Successful"
+    return redirect(url_for("login"))
 
 if __name__ == "__main__":
     app.run("127.0.0.1",9800,True)
