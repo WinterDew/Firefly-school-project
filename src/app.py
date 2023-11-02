@@ -193,4 +193,4 @@ def delete_user():
         return render_template("delete_user.html", toast = session["toast"])
 
 if __name__ == "__main__":
-    app.run("127.0.0.1",9800,True)
+    app.run("127.0.0.1",9800,debug=True)
