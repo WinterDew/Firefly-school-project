@@ -3,24 +3,34 @@
 
 :root {
     /* Colour pallete */
-    --bg-color : #242742;
-    --pr-color : #FF6257;
-    --n1-color : #36384E;
-    --n2-color : #9294A0;
-    --ac-color : #FFFFFF;
+    --bg-color: #242742;
+    --pr-color: #FF6257;
+    --n1-color: #36384E;
+    --n2-color: #9294A0;
+    --ac-color: #FFFFFF;
     --ft-fml: 'Roboto', sans-serif;
-    
+
 }
 
 *,
 *::after,
-*::before{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
 }
 
 .messages {
     position: absolute;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    width: 100vw;
+    background-color: black;
+    color: white;
+    text-align: center;
 }
